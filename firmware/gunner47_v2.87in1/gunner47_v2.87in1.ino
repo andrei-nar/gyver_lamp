@@ -464,6 +464,9 @@ void setup()
   #endif
   #endif
 
+  #if USE_OLED_DISPLAY
+  lcd_display_init();
+  #endif
 
   // TELNET
   #if defined(GENERAL_DEBUG) && GENERAL_DEBUG_TELNET

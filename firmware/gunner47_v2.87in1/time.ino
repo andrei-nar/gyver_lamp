@@ -194,6 +194,9 @@ if (stillUseNTP)// && ntpServerAddressResolved) хз, нужно ли это п�
       }
     }
   }
+#if USE_OLED_DISPLAY
+  updateLCD(false);
+#endif
 }
 
 #ifdef USE_NTP

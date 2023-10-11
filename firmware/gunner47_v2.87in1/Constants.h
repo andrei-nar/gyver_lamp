@@ -122,6 +122,25 @@ const uint8_t AP_STATIC_IP[] = {192, 168, 4, 1};            // статичес�
                                                             // шпаргалка по настройке матрицы здесь: https://alexgyver.ru/wp-content/uploads/2021/06/%D1%81%D1%85%D0%B5%D0%BC%D0%B03-1.jpg
                                                             // (но в ней, кажется, перепутаны местами квадратики в 4м столбце, а может, и ещё какие-то)
 
+#define USE_OLED_DISPLAY      (true)
+#if USE_OLED_DISPLAY
+#define DISPLAY_OLED_091      (true)
+#define DISPLAY_OLED_096      (false)
+
+#if DISPLAY_OLED_096
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define DISPLAY_I2C_ADDR      0x3C
+#elif DISPLAY_OLED_091
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
+#define DISPLAY_I2C_ADDR      0x3C
+#else
+#error "Unsupported display"
+#endif
+
+#endif
+
 // --- ЭФФЕКТЫ -------------------------
 #define RUNNING_TEXT_DEFAULT  ("Pektusin")                    // текст, который будет выводиться в эффекте Бегущая строка по умолчанию. его можно менять в приложении
 #define RANDOM_SETTINGS_IN_CYCLE_MODE     (1U)              // с этой строчкой в режиме Цикл эффекты будут включаться на случайных (но удачных) настройках Скорости и Масштаба
