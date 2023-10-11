@@ -23,11 +23,11 @@ uint16_t speed = 20;                                        // speed is set dyna
 uint16_t scale = 30;                                        // scale is set dynamically once we've started up
 
 // This is the array that we keep our computed noise values in
-#define MAX_DIMENSION (max(WIDTH, HEIGHT))
-#if (WIDTH > HEIGHT)
-uint8_t noise[WIDTH][WIDTH];
+#define MAX_DIMENSION (max(MATRIX_WIDTH, MATRIX_HEIGHT))
+#if (MATRIX_WIDTH > MATRIX_HEIGHT)
+uint8_t noise[MATRIX_WIDTH][MATRIX_WIDTH];
 #else
-uint8_t noise[HEIGHT][HEIGHT];
+uint8_t noise[MATRIX_HEIGHT][MATRIX_HEIGHT];
 #endif
 
 CRGBPalette16 currentPalette(PartyColors_p);
@@ -50,9 +50,9 @@ void madnessNoiseRoutine()
     speed = modes[currentMode].Speed;
   }
   fillnoise8();
-  for (uint8_t i = 0; i < WIDTH; i++)
+  for (uint8_t i = 0; i < MATRIX_WIDTH; i++)
   {
-    for (uint8_t j = 0; j < HEIGHT; j++)
+    for (uint8_t j = 0; j < MATRIX_HEIGHT; j++)
     {
       CRGB thisColor = CHSV(noise[j][i], 255, noise[i][j]);
       drawPixelXY(i, j, thisColor);                         //leds[XY(i, j)] = CHSV(noise[j][i], 255, noise[i][j]);
@@ -259,9 +259,9 @@ void fillNoiseLED()
   x += speed / 8;
   y -= speed / 16;
 
-  for (uint8_t i = 0; i < WIDTH; i++)
+  for (uint8_t i = 0; i < MATRIX_WIDTH; i++)
   {
-    for (uint8_t j = 0; j < HEIGHT; j++)
+    for (uint8_t j = 0; j < MATRIX_HEIGHT; j++)
     {
       uint8_t index = noise[j][i];
       uint8_t bri =   noise[i][j];

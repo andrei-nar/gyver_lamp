@@ -404,7 +404,7 @@ SendCurrentDelegate MqttManager::sendCurrentDelegate = NULL;
 uint16_t localPort = ESP_UDP_PORT;
 char packetBuffer[MAX_UDP_BUFFER_SIZE];                     // buffer to hold incoming packet
 char inputBuffer[MAX_UDP_BUFFER_SIZE];
-static const uint8_t maxDim = max(WIDTH, HEIGHT);
+static const uint8_t maxDim = max(MATRIX_WIDTH, MATRIX_HEIGHT);
 
 ModeType modes[MODE_AMOUNT];
 AlarmType alarms[7];

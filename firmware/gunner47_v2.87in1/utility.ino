@@ -8,13 +8,13 @@ void fillAll(CRGB color)
 }
 
 // функция отрисовки точки по координатам X Y
-#if (WIDTH > 127) || (HEIGHT > 127)
+#if (MATRIX_WIDTH > 127) || (MATRIX_HEIGHT > 127)
 void drawPixelXY(int16_t x, int16_t y, CRGB color)
 #else
 void drawPixelXY(int8_t x, int8_t y, CRGB color)
 #endif
 {
-  if (x < 0 || x > (WIDTH - 1) || y < 0 || y > (HEIGHT - 1)) return;
+  if (x < 0 || x > (MATRIX_WIDTH - 1) || y < 0 || y > (MATRIX_HEIGHT - 1)) return;
   //uint32_t thisPixel = XY((uint8_t)x, (uint8_t)y) * SEGMENTS;
   //for (uint8_t i = 0; i < SEGMENTS; i++)
   //{
@@ -45,49 +45,49 @@ uint32_t getPixColorXY(uint8_t x, uint8_t y)
 
 // ************* НАСТРОЙКА МАТРИЦЫ *****
 #if (CONNECTION_ANGLE == 0 && STRIP_DIRECTION == 0)
-#define _WIDTH WIDTH
+#define _WIDTH MATRIX_WIDTH
 #define THIS_X x
 #define THIS_Y y
 
 #elif (CONNECTION_ANGLE == 0 && STRIP_DIRECTION == 1)
-#define _WIDTH HEIGHT
+#define _WIDTH MATRIX_HEIGHT
 #define THIS_X y
 #define THIS_Y x
 
 #elif (CONNECTION_ANGLE == 1 && STRIP_DIRECTION == 0)
-#define _WIDTH WIDTH
+#define _WIDTH MATRIX_WIDTH
 #define THIS_X x
-#define THIS_Y (HEIGHT - y - 1)
+#define THIS_Y (MATRIX_HEIGHT - y - 1)
 
 #elif (CONNECTION_ANGLE == 1 && STRIP_DIRECTION == 3)
-#define _WIDTH HEIGHT
-#define THIS_X (HEIGHT - y - 1)
+#define _WIDTH MATRIX_HEIGHT
+#define THIS_X (MATRIX_HEIGHT - y - 1)
 #define THIS_Y x
 
 #elif (CONNECTION_ANGLE == 2 && STRIP_DIRECTION == 2)
-#define _WIDTH WIDTH
-#define THIS_X (WIDTH - x - 1)
-#define THIS_Y (HEIGHT - y - 1)
+#define _WIDTH MATRIX_WIDTH
+#define THIS_X (MATRIX_WIDTH - x - 1)
+#define THIS_Y (MATRIX_HEIGHT - y - 1)
 
 #elif (CONNECTION_ANGLE == 2 && STRIP_DIRECTION == 3)
-#define _WIDTH HEIGHT
-#define THIS_X (HEIGHT - y - 1)
-#define THIS_Y (WIDTH - x - 1)
+#define _WIDTH MATRIX_HEIGHT
+#define THIS_X (MATRIX_HEIGHT - y - 1)
+#define THIS_Y (MATRIX_WIDTH - x - 1)
 
 #elif (CONNECTION_ANGLE == 3 && STRIP_DIRECTION == 2)
-#define _WIDTH WIDTH
-#define THIS_X (WIDTH - x - 1)
+#define _WIDTH MATRIX_WIDTH
+#define THIS_X (MATRIX_WIDTH - x - 1)
 #define THIS_Y y
 
 #elif (CONNECTION_ANGLE == 3 && STRIP_DIRECTION == 1)
-#define _WIDTH HEIGHT
+#define _WIDTH MATRIX_HEIGHT
 #define THIS_X y
-#define THIS_Y (WIDTH - x - 1)
+#define THIS_Y (MATRIX_WIDTH - x - 1)
 
 #else
 !!!!!!!!!!!!!!!!!!!!!!!!!!!   смотрите инструкцию: https://alexgyver.ru/wp-content/uploads/2018/11/scheme3.jpg
 !!!!!!!!!!!!!!!!!!!!!!!!!!!   такого сочетания CONNECTION_ANGLE и STRIP_DIRECTION не бывает
-#define _WIDTH WIDTH
+#define _WIDTH MATRIX_WIDTH
 #define THIS_X x
 #define THIS_Y y
 #pragma message "Wrong matrix parameters! Set to default"

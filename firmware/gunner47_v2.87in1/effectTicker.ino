@@ -187,14 +187,14 @@ void changePower()
 
 #ifdef WARNING_IF_NO_TIME
 void noTimeWarning(){
-  for (uint8_t i = 0; i < WIDTH; i++) leds[XY(i, 0U)] = CRGB::Black;
+  for (uint8_t i = 0; i < MATRIX_WIDTH; i++) leds[XY(i, 0U)] = CRGB::Black;
   uint8_t z = millis() / 1000U;
   #ifdef USE_NTP
-    leds[XY(z % WIDTH , 0U)] = espMode ? CRGB::Red : CRGB::Blue; // если при включенном NTP время не получено, будем красным цветом мигать
-    leds[XY((z + WIDTH / 2U) % WIDTH , 0U)] = espMode ? CRGB::Red : CRGB::Blue;
+    leds[XY(z % MATRIX_WIDTH , 0U)] = espMode ? CRGB::Red : CRGB::Blue; // если при включенном NTP время не получено, будем красным цветом мигать
+    leds[XY((z + MATRIX_WIDTH / 2U) % MATRIX_WIDTH , 0U)] = espMode ? CRGB::Red : CRGB::Blue;
   #else  
-    leds[XY(z % WIDTH , 0U)] = espMode ? CRGB::Yellow : CRGB::Blue; // иначе скромно жёлтым - нормальная ситуация при отсутствии NTP
-    leds[XY((z + WIDTH / 2U) % WIDTH , 0U)] = espMode ? CRGB::Yellow : CRGB::Blue;
+    leds[XY(z % MATRIX_WIDTH , 0U)] = espMode ? CRGB::Yellow : CRGB::Blue; // иначе скромно жёлтым - нормальная ситуация при отсутствии NTP
+    leds[XY((z + MATRIX_WIDTH / 2U) % MATRIX_WIDTH , 0U)] = espMode ? CRGB::Yellow : CRGB::Blue;
   #endif //USE_NTP
 }
 void noTimeWarningShow(){
@@ -204,7 +204,7 @@ void noTimeWarningShow(){
 }
 void noTimeClear(){
   if (!timeSynched){ 
-    for (uint8_t i = 0; i < WIDTH; i++) 
+    for (uint8_t i = 0; i < MATRIX_WIDTH; i++) 
        leds[XY(i, 0U)] = CRGB::Black; 
     FastLED.show();
   }

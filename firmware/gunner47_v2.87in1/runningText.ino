@@ -14,7 +14,7 @@
 
 // --- ДЛЯ РАЗРАБОТЧИКОВ ---------------
 
-int16_t offset = WIDTH;
+int16_t offset = MATRIX_WIDTH;
 uint32_t scrollTimer = 0LL;
 
 boolean fillString(const char* text, CRGB letterColor, boolean itsText)
@@ -23,7 +23,7 @@ boolean fillString(const char* text, CRGB letterColor, boolean itsText)
 //Serial.println(text);
   if (!text || !strlen(text)) { return true; }
   if (loadingFlag && !itsText) {
-    offset = WIDTH;                                         // перемотка в правый край
+    offset = MATRIX_WIDTH;                                         // перемотка в правый край
     loadingFlag = false;
   }
 
@@ -49,7 +49,7 @@ boolean fillString(const char* text, CRGB letterColor, boolean itsText)
     offset--;
     if (offset < (int16_t)(-j * (LET_WIDTH + SPACE)))       // строка убежала
     {
-      offset = WIDTH + 3;
+      offset = MATRIX_WIDTH + 3;
       return true;
     }
     FastLED.show();    
@@ -199,7 +199,7 @@ void drawLetter(uint8_t letter, int8_t offset, CRGB letterColor)
  
   uint8_t start_pos = 0, finish_pos = LET_WIDTH;
 
-  if (offset < (int8_t)-LET_WIDTH || offset > (int8_t)WIDTH)
+  if (offset < (int8_t)-LET_WIDTH || offset > (int8_t)MATRIX_WIDTH)
   {
     return;
   }
@@ -207,9 +207,9 @@ void drawLetter(uint8_t letter, int8_t offset, CRGB letterColor)
   {
     start_pos = (uint8_t)-offset;
   }
-  if (offset > (int8_t)(WIDTH - LET_WIDTH))
+  if (offset > (int8_t)(MATRIX_WIDTH - LET_WIDTH))
   {
-    finish_pos = (uint8_t)(WIDTH - offset);
+    finish_pos = (uint8_t)(MATRIX_WIDTH - offset);
   }
   for (uint8_t i = start_pos; i < finish_pos; i++)
   {
